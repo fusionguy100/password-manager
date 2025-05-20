@@ -16,6 +16,9 @@ canvas = Canvas(height = 200, width = 200)
 canvas.create_image(100,100,image=logo_img)
 canvas.pack()
 
+website_label = Label(text="Website: ")
+email_user_label = Label(text = "Email/Username: ")
+password_label = Label(text = "Password")
 
 
 
