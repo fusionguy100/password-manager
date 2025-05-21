@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -37,13 +38,20 @@ password_entry.grid(row=3, column=1, pady=5)
 
 # --- Buttons ---
 def save():
-    data_file = open("data_file.txt", "a" )
-    website = website_entry.get()
-    email = email_entry.get()
-    password = password_entry.get()
-    data_file.write(f"{website} | {email} | {password} \n")
-    website_entry.delete(0,"end")
-    password_entry.delete(0,"end")
+        website = website_entry.get()
+        email = email_entry.get()
+        password = password_entry.get()
+
+        if len(website) == 0 or len(password) == 0:
+            messagebox.showerror(title = "Error", message= "Please don't leave anything empty!")
+        else:
+            is_ok =  messagebox.askokcancel(title = website, message = f"These are the details entered: \n Email: {email}" f"\n Password: {password}\n Is it okay to save?")
+
+            if is_ok:
+                with open("data_file.txt", "a") as data_file:
+                    data_file.write(f"{website} | {email} | {password}\n")
+                    website_entry.delete(0,"end")
+                    password_entry.delete(0,"end")
 
 
 generate_password_button = Button(text="Generate Password")
