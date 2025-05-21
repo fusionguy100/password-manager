@@ -28,15 +28,32 @@ website_entry.focus()
 
 email_entry = Entry(width=35)
 email_entry.grid(row=2, column=1, columnspan=2, pady=5)
+email_entry.insert(0, "@example.com")
 
 password_entry = Entry(width=21)
 password_entry.grid(row=3, column=1, pady=5)
 
+
+
 # --- Buttons ---
+def save():
+    data_file = open("data_file.txt", "a" )
+    website = website_entry.get()
+    email = email_entry.get()
+    password = password_entry.get()
+    data_file.write(f"{website} | {email} | {password} \n")
+    website_entry.delete(0,"end")
+    password_entry.delete(0,"end")
+
+
 generate_password_button = Button(text="Generate Password")
 generate_password_button.grid(row=3, column=2, pady=5)
 
-add_button = Button(text="Add", width=36)
+add_button = Button(text="Add", width=36, command=save)
 add_button.grid(row=4, column=1, columnspan=2, pady=10)
+
+
+
+
 
 window.mainloop()
